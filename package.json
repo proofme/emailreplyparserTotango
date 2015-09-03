@@ -1,17 +1,13 @@
 {
-  "name": "emailreplyparser",
-  "version": "0.0.1",
+  "name": "emailreplyparsertotango",
+  "version": "0.0.4",
   "description": "Node.js Port of GitHub's email_reply_parser.rb with enhancements",
-  "author": {
-    "name": "Ophir SWeiry",
-    "email": "ophir@totango.com",
-    "url": "http://www.totango.com/"
-  },
+  "author": "Ophir SWeiry <ophir@totango.com> (http://www.totango.com/)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/totango/emailreplyparserTotango.git"
+    "url": "git+https://github.com/totango/emailreplyparserTotango.git"
   },
-  "main": "./lib/emailreplyparser",
+  "main": "./lib/emailreplyparsertotango",
   "engines": {
     "node": ">= 0.4.0"
   },
@@ -21,12 +17,16 @@
     "emailreplyparser",
     "email_reply_parser"
   ],
-  "readme": "# Email Reply Parser\n\nNode.js port of Github's EmailReplyParser, a small library to parse plain text email content.\n\n\n## Known Issues\n<small>(Taken from Github's version)</small>\n\n### Quoted Headers\n\nQuoted headers aren't picked up if there's an extra line break:\n\n    On <date>, <author> wrote:\n\n    > blah\n\nAlso, they're not picked up if the email client breaks it up into\nmultiple lines.  GMail breaks up any lines over 80 characters for you.\n\n    On <date>, <author>\n    wrote:\n    > blah\n\nNot to mention that we're search for \"on\" and \"wrote\".  It won't work\nwith other languages.\n\nPossible solution: Remove \"reply@reply.github.com\" lines...\n\n### Weird Signatures\n\nLines starting with `-` or `_` sometimes mark the beginning of\nsignatures:\n\n    Hello\n\n    --\n    Rick\n\nNot everyone follows this convention:\n\n    Hello\n\n    Mr Rick Olson\n    Galactic President Superstar Mc Awesomeville\n    GitHub\n\n    **********************DISCLAIMER***********************************\n    * Note: blah blah blah                                            *\n    **********************DISCLAIMER***********************************\n\n\n\n### Strange Quoting\n\nApparently, prefixing lines with `>` isn't universal either:\n\n    Hello\n\n    --\n    Rick\n\n    ________________________________________\n    From: Bob [reply@reply.github.com]\n    Sent: Monday, March 14, 2011 6:16 PM\n    To: Rick\n\n\n### To run the tests\n* Install nodeunit  `npm install nodeunit`\n* Run the tests:   `nodeunit test/email_reply_parser_test.js`",
-  "readmeFilename": "README.md",
   "bugs": {
     "url": "https://github.com/totango/emailreplyparserTotango/issues"
   },
   "homepage": "https://github.com/totango/emailreplyparserTotango",
-  "_id": "emailreplyparserTotango@0.0.1",
-  "_from": "emailreplyparser@*"
+  "_from": "emailreplyparser@*",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "ISC"
 }
