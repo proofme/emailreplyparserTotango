@@ -2,7 +2,7 @@ var fs = require('fs');
 
 var _  = require('underscore');
 
-var EmailReplyParser = require('../lib/emailreplyparser').EmailReplyParser;
+var EmailReplyParser = require('../lib/emailreplyparsertotango').EmailReplyParserTotango;
 
 function get_email(name) {
 	var data = fs.readFileSync(__dirname + '/emails/' + name + '.txt', 'ascii');
@@ -180,6 +180,22 @@ exports.test_parse_reply = function(test){
 
 exports.test_correctly_reads_top_post_when_line_starts_with_On = function(test){
     reply = get_email('email_1_7');
+    test.equal(5, reply.fragments.length);
+
+    test.deepEqual([false, false, true, false, false], _.map(reply.fragments, function(f) { return f.quoted; }));
+    test.deepEqual([false, true, true, true, true], _.map(reply.fragments, function(f) { return f.hidden; }));
+    test.deepEqual([false, true, false, false, true], _.map(reply.fragments, function(f) { return f.signature; }));
+
+    test.ok((new RegExp('^Oh thanks.\n\nOn the')).test(reply.fragments[0].to_s()));
+    test.ok((new RegExp('^-A')).test(reply.fragments[1].to_s()));
+    test.ok((/^On [^\:]+\:/m).test(reply.fragments[2].to_s()));
+    test.ok((new RegExp('^_')).test(reply.fragments[4].to_s()));
+    test.done();
+}
+
+
+exports.test_yahoo_email = function(test){
+    reply = get_email('email_yahoo');
     test.equal(5, reply.fragments.length);
 
     test.deepEqual([false, false, true, false, false], _.map(reply.fragments, function(f) { return f.quoted; }));
